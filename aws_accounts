@@ -1,0 +1,13 @@
+#!/bin/bash
+
+configuration=($(ls  ~/.aws/accounts/))
+i=0
+echo $configuration
+for c in "${configuration[@]}"; do
+  echo $i $c
+  i=$((i+1))
+done
+read environment
+echo ${configuration[environment]}
+cp -i ~/.aws/accounts/${configuration[environment]} ~/.aws/credentials
+aws sts get-caller-identity
