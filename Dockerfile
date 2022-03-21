@@ -36,7 +36,9 @@ RUN wget https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_386.zip\
 
 
 RUN npm install --global yarn && yarn global add wetty
-RUN  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
+RUN  unzip awscliv2.zip 
+RUN ./aws/install
 
 
 RUN useradd -d /home/term -m -s /bin/bash term
