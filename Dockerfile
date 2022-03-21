@@ -14,7 +14,8 @@ RUN apt-get update \
     wget \
     git \
     unzip \
-    python3.6 python3-distutils python3-pip python3-apt 
+    python3.6 python3-distutils python3-pip python3-apt \
+    awscli
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash 
 RUN apt-get install nodejs -y
@@ -33,14 +34,9 @@ RUN wget https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_386.zip\
     && rm packer_1.8.0_linux_386.zip \
     && mv packer /usr/local/bin \ 
     && chmod +x /usr/local/bin/packer
-
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin.deb" && dpkg -i session-manager-plugin.deb
 
 RUN npm install --global yarn && yarn global add wetty
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
-RUN  unzip awscliv2.zip 
-RUN ./aws/install
-
-
 RUN useradd -d /home/term -m -s /bin/bash term
 RUN echo 'term:term' | chpasswd
 COPY files/aws_accounts /usr/local/bin
