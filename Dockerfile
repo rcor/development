@@ -41,6 +41,8 @@ RUN  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv
 
 RUN useradd -d /home/term -m -s /bin/bash term
 RUN echo 'term:term' | chpasswd
+COPY files/aws_accounts /usr/local/bin
+RUN chmod +x /usr/local/bin/aws_accounts
 #RUN cp ~/.config/yarn/global/node_modules/wetty/conf/wetty.conf /etc/init
 ENTRYPOINT ["wetty"]
 
